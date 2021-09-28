@@ -9,3 +9,18 @@
 .mat-card {
   cursor: pointer;
 }
+
+.spinner {
+  position: absolute;
+  left: 40%;
+  top: 50%;
+}
+
+.skeleton-image {
+  background-image: url('https://imgs.developpaper.com/imgs/2020519143311255.png');
+  background-color: #fff;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 290px;
+  background-size: cover;
+}

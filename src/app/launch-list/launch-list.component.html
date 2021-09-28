@@ -25,9 +25,19 @@
           width="300"
           mat-card-image
           loading="lazy"
+          fallback="../../assets/images/no_image_available.png"
           [src]="launch.links.flickr_images[0]"
+          [hidden]="!launch.imageLoaded"
+          (load)="launch.imageLoaded = true"
+          (error)="launch.imageError = true"
           alt="Photo of {{ launch.mission_name }}"
         />
+        <div class="skeleton-image" 
+        *ngIf="!launch.imageLoaded && !launch.imageError">
+        </div>
+        <div class="spinner" *ngIf="!launch.imageLoaded && !launch.imageError">
+          <mat-spinner [diameter]="50"></mat-spinner>
+        </div>
       </mat-card>
     </section>
   </main>

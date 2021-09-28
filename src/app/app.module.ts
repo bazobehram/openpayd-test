@@ -14,13 +14,16 @@ import { RelativeTimePipe } from "./core/helpers/pipes/relative-time/relative-ti
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { FallbackImgDirective } from "./directives/fallback-img-directive";
 
 @NgModule({
   declarations: [
     AppComponent,
     LaunchListComponent,
     LaunchDetailsComponent,
-    RelativeTimePipe
+    RelativeTimePipe,
+    FallbackImgDirective
   ],
   imports: [
     BrowserModule,
@@ -29,6 +32,7 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
     HttpClientModule,
     BrowserAnimationsModule,
     MatCardModule,
+    MatProgressSpinnerModule,
     StoreModule.forRoot(launchReducers),
     EffectsModule.forRoot(launchEffects),
     StoreDevtoolsModule.instrument()
