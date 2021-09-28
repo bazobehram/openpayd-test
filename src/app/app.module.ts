@@ -16,6 +16,9 @@ import { EffectsModule } from "@ngrx/effects";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { FallbackImgDirective } from "./directives/fallback-img-directive";
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { MatGridListModule } from "@angular/material/grid-list";
+import { MatIconModule } from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -33,9 +36,13 @@ import { FallbackImgDirective } from "./directives/fallback-img-directive";
     BrowserAnimationsModule,
     MatCardModule,
     MatProgressSpinnerModule,
+    NgxGalleryModule,
+    MatGridListModule,
+    MatIconModule,
     StoreModule.forRoot(launchReducers),
     EffectsModule.forRoot(launchEffects),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
