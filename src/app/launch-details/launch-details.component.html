@@ -10,17 +10,17 @@
     <section class="flex-item-left" style="padding-top: 20px;">
       <mat-card style="width: 400px; margin: auto;">
         <mat-card-header>
-          <mat-card-title>{{ launchDetails.mission_name }}</mat-card-title>
+          <mat-card-title>{{ launchDetails?.mission_name }}</mat-card-title>
         </mat-card-header>
         <img
           height="256"
           width="256"
           mat-card-image
-          [src]="launchDetails.links.mission_patch"
-          alt="Mission patch of {{ launchDetails.mission_name }}"
+          [src]="launchDetails.links?.mission_patch"
+          alt="Mission patch of {{ launchDetails?.mission_name }}"
         />
         <mat-card-content>
-          <p>{{ launchDetails.details }}</p>
+          <p>{{ launchDetails?.details }}</p>
         </mat-card-content>
       </mat-card>
     </section>
@@ -28,5 +28,4 @@
       <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
     </section>
   </div>
-  
 </ng-container>

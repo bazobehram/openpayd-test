@@ -1,8 +1,10 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from "@kolkov/ngx-gallery";
+import { Observable } from "rxjs";
 import { map, switchMap } from "rxjs/operators";
-import { LaunchDetailsGQL } from "../services/spacexGraphql.service";
+import { LaunchDetailsFacadeService } from "../services/launch-details-facade.service";
+
 
 @Component({
   selector: "app-launch-details",
@@ -13,26 +15,26 @@ import { LaunchDetailsGQL } from "../services/spacexGraphql.service";
 export class LaunchDetailsComponent {
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly launchDetailsService: LaunchDetailsGQL
+    private readonly launchDetailsFacade: LaunchDetailsFacadeService
   ) {}
   
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[] = [];
+  launchDetails$: Observable<any>;
+
   
-  launchDetails$ = this.route.paramMap.pipe(
-    map(params => params.get("id") as string),
-    switchMap(id => this.launchDetailsService.fetch({ id })),
-    map(res => res.data.launch)
-  );
-  tiles = [
-    {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
-    {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
-    {text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
-    {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
-  ];
   ngOnInit() {
+    this.getAllLaunchDetails();
     this.makeGalleryOptions();
     this.getAllDetailImages();
+  }
+
+  getAllLaunchDetails() {
+    this.route.paramMap.subscribe(params => {
+      this.launchDetails$ = this.launchDetailsFacade.launchDetailsStoreCache(
+        params.get("id")
+      );
+    })
   }
 
   makeGalleryOptions() {
@@ -71,7 +73,6 @@ export class LaunchDetailsComponent {
             big: image
           };
           this.galleryImages.push(galleryModel);
-          console.log(this.galleryImages);
         });
       }
     });
